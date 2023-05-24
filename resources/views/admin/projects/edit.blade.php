@@ -45,6 +45,29 @@
               @enderror
             </div>
 
+
+            <div class="my-3 form-group">
+              <h2>Technologies</h2>
+        
+              @foreach($technologies as $item)
+              <div class="form-check">
+                <input type="checkbox" id="technology-{{$item->id}}" name="technologies[]" value="{{$item->id}}" @checked($project->technologies->contains($item))>
+                <label for="technology-{{$item->id}}">{{$item->name}}</label>
+              </div>
+              @endforeach
+        
+            </div>
+
+
+
+
+
+
+
+
+
+
+
             <div class="mb-3">
               <label for="content" class="form-label">Content</label>
               <textarea id="content" name="content" class="form-control @error('content') is-invalid @enderror" required>{{old('content')  ?? $project->content}}</textarea>
