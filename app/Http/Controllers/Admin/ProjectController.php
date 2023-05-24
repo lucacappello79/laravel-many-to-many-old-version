@@ -45,13 +45,20 @@ class ProjectController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validation($request);
         $formData = $request->all();
+        $this->validation($request);
 
         $newProject = new Project();
         $newProject->fill($formData);
 
+
         $newProject->save();
+
+        if (array_key_exists('technologies', $formData)) {
+
+            $newProject->technologies()->attach($formData['technologies']);
+        }
+
 
         return redirect()->route('admin.projects.show', $newProject->slug);
     }
