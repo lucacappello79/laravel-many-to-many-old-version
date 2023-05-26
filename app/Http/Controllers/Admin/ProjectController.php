@@ -7,6 +7,7 @@ use App\Models\Project;
 use App\Models\Technology;
 use App\Models\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 use function PHPSTORM_META\type;
@@ -49,6 +50,16 @@ class ProjectController extends Controller
         $this->validation($request);
 
         $newProject = new Project();
+
+        // test immagine
+        if ($request->hasFile('cover_image')) {
+
+            $path = Storage::put('post_images', $request->cover_image);
+
+            $formData['cover_image'] = $path;
+        }
+        //fine test
+
         $newProject->fill($formData);
 
 

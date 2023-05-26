@@ -11,7 +11,7 @@
         </div>
         <div class="card-body">
 
-          <form action="{{ route('admin.projects.store') }}" method="POST" class="text-dark">
+          <form action="{{ route('admin.projects.store') }}" method="POST" class="text-dark" enctype="multipart/form-data">
             @csrf
 
             <div class="mb-3">
@@ -43,6 +43,19 @@
               </div>
               @enderror
             </div>
+
+            {{-- test file --}}
+
+            <div class="my-4">
+              <label for="cover_image">Project Thumb</label>
+              <input type="file" id="cover_image" name="cover_image" class="form-control @error('cover_image') is-invalid @enderror">
+              @error('cover_image')
+                  <div class="invalid-feedback">{{message}}</div>
+              @enderror
+            </div>
+
+
+            {{-- fine test --}}
 
 
             <div class="my-3 form-group">
