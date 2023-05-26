@@ -11,6 +11,10 @@
 </div>
 
 
+<div class="container">
+  <img src="{{asset ('storage/' . $project->cover_image) }}" alt="fnf">
+</div>
+
 <main class="container-fluid text-dark py-4">
   <div class="row justify-content-center">
     <div class="col-6">
