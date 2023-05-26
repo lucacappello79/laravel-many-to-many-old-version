@@ -110,6 +110,26 @@ class ProjectController extends Controller
         $formData = $request->all();
         $this->validation($request);
 
+
+        // test img
+
+        if ($request->hasFile('cover_image')) {
+
+            if ($project->cover_image) {
+
+                Storage::delete($project->cover_image);
+            }
+
+            $path = Storage::put('project_images', $request->cover_image);
+
+            $formData['cover_image'] = $path;
+        }
+
+
+        // fine test
+
+
+
         $project->update($formData);
         // in teoria il save dovrebbe essere automatico ma alcune versioni di laravel lo vogliono
         $project->save();
@@ -148,7 +168,8 @@ class ProjectController extends Controller
             'type' => 'required|max:100',
             'slug' => 'required|max:120',
             'content' => 'required|min:40',
-            'type_id' => 'nullable|exists:types,id'
+            'type_id' => 'nullable|exists:types,id',
+            'cover_image' => 'nullable|image|max:5000',
 
         ], [
 
@@ -163,6 +184,8 @@ class ProjectController extends Controller
             'content.required' => "E' richiesta una descrizione",
             'content.max' => 'La descrizione deve avere un minimo di :min caratteri',
             'type_id.exists' => 'La tipologia deve venire inserita',
+            'cover_image.image' => 'Inserire un file immagine',
+            'cover_image.max' => 'File img troppo grande',
 
         ])->validate();
 
