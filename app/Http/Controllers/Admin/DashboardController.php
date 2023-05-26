@@ -12,7 +12,7 @@ class DashboardController extends Controller
     {
         // dd(Auth::user());
         // dd(Auth::id());
-        $user = Auth::user();
+        // $user = Auth::user();
         // dd($user->userDetail?->address);
 
         return view('admin.dashboard');

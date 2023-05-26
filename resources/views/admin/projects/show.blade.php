@@ -3,6 +3,14 @@
 @section('content')
 
 <h2 class="text-center">Language used: {{$project->type->name ?? 'undefined'}}</h2>
+
+<div class="d-flex py-3">
+  @foreach($project->technologies as $item)
+    <span class="badge rounded-pill mx-1" style="background-color: {{$item->color}}">{{$item->name}}</span>
+  @endforeach
+</div>
+
+
 <main class="container-fluid text-dark py-4">
   <div class="row justify-content-center">
     <div class="col-6">
